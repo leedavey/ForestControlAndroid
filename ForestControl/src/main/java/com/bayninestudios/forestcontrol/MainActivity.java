@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 
     public void playSound(View view) {
         Log.d("debug", " " + (String)view.getTag());
+
 //        new SendSound().execute("1");
     }
 
