@@ -1,12 +1,10 @@
 package com.bayninestudios.forestcontrol;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
 import java.io.BufferedWriter;
@@ -20,7 +18,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                             WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         View view = this.findViewById(R.layout.activity_main);
 //        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
@@ -34,9 +32,9 @@ public class MainActivity extends Activity {
     }
 
     public void playSound(View view) {
-        Log.d("debug", " " + (String)view.getTag());
-
-//        new SendSound().execute("1");
+        String[] playString = new String[1];
+        playString[0] = (String) view.getTag();
+        new SendSound().execute(playString);
     }
 
     private class SendSound extends AsyncTask<String, Void, Integer> {

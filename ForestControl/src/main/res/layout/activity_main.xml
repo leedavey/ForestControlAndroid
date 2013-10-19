@@ -18,7 +18,8 @@
         android:tag="@string/button1"
         android:minWidth="100dp"
         android:minHeight="100dp"
-        android:onClick="playSound" />
+        android:onClick="playSound"
+        android:src="@drawable/tangled" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -31,6 +32,7 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/imageButton1"
         android:labelFor="10"
-        android:longClickable="false" />
+        android:longClickable="false"
+        android:src="@drawable/seethelight" />
 
 </RelativeLayout>
