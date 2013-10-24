@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
 //        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -32,6 +33,11 @@ public class MainActivity extends Activity {
     }
 
     public void playSound(View view) {
+        /*
+        1 - When will my life begin
+        2 - I see the light
+        3 -
+         */
         String[] playString = new String[1];
         playString[0] = (String) view.getTag();
         new SendSound().execute(playString);

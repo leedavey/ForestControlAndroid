@@ -6,7 +6,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/abc_ab_bottom_solid_dark_holo">
 
 
     <ImageButton
@@ -16,8 +17,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:tag="@string/button1"
-        android:minWidth="100dp"
-        android:minHeight="100dp"
         android:onClick="playSound"
         android:src="@drawable/tangled" />
 
@@ -25,8 +24,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton2"
-        android:minWidth="100dp"
-        android:minHeight="100dp"
         android:onClick="playSound"
         android:tag="@string/button2"
         android:layout_alignParentTop="true"
@@ -34,5 +31,45 @@
         android:labelFor="10"
         android:longClickable="false"
         android:src="@drawable/seethelight" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:layout_below="@+id/imageButton1"
+        android:layout_alignParentLeft="true"
+        android:tag="@string/button3"
+        android:src="@drawable/mermaid"
+        android:onClick="playSound" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton3"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_alignLeft="@+id/imageButton2"
+        android:tag="@string/button4"
+        android:src="@drawable/underthesea"
+        android:onClick="playSound" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton4"
+        android:layout_below="@+id/imageButton"
+        android:layout_alignParentLeft="true"
+        android:tag="@string/button5"
+        android:src="@drawable/belle"
+        android:onClick="playSound" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton5"
+        android:layout_below="@+id/imageButton"
+        android:layout_toRightOf="@+id/imageButton4"
+        android:tag="@string/button6"
+        android:src="@drawable/gotadream"
+        android:onClick="playSound" />
 
 </RelativeLayout>
