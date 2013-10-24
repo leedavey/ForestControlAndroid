@@ -1,11 +1,16 @@
 package com.bayninestudios.forestcontrol;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
@@ -14,6 +19,13 @@ import java.net.Socket;
 
 public class MainActivity extends Activity {
 
+    private static final int SWIPE_MIN_DISTANCE = 120;
+    private static final int SWIPE_MAX_OFF_PATH = 250;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
+    private ImageButton button1;
+    private GestureDetector gestureDetector;
+    View.OnTouchListener gestureListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +33,23 @@ public class MainActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         View view = this.findViewById(R.layout.activity_main);
-//        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+        // Gesture detection
+        gestureDetector = new GestureDetector(this, new MyGestureDetector());
+        gestureListener = new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        };
+
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        View but = this.findViewById(R.id.imageButton1);
+        but.setOnTouchListener(gestureListener);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -38,8 +64,7 @@ public class MainActivity extends Activity {
         2 - I see the light
         3 -
          */
-        String[] playString = new String[1];
-        playString[0] = (String) view.getTag();
+        String[] playString = { (String) view.getTag() };
         new SendSound().execute(playString);
     }
 
@@ -59,5 +84,25 @@ public class MainActivity extends Activity {
             }
             return 0;
         }
+    }
+
+    class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            try {
+                if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
+                    return false;
+                // right to left swipe
+                if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    Toast.makeText(MainActivity.this, "Left Swipe", Toast.LENGTH_SHORT).show();
+                }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    Toast.makeText(MainActivity.this, "Right Swipe", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                // nothing
+            }
+            return false;
+        }
+
     }
 }
